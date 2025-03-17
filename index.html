@@ -31,7 +31,7 @@
             justify-content: center;
         }
         .title-slide {
-            background: linear-gradient(45deg, #1e90ff, #00bfff);
+            background: linear-gradient(45deg, #1e90ff, #fff);
             color: white;
             text-align: center;
         }
@@ -63,6 +63,9 @@
         .footer a:hover {
             text-decoration: underline;
         }
+        .title-slide .footer a {
+            color: white;
+        }
         .download-btn {
             position: fixed;
             top: 1em;
@@ -78,6 +81,13 @@
         .download-btn:hover {
             background: #00bfff;
         }
+        /* Responsive Image Styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1em 0;
+        }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -90,6 +100,7 @@
             .reveal { font-size: 0.9em; }
             .reveal .slides section { padding: 1em; }
             .footer { font-size: 0.7em; }
+            img { max-width: 80%; }
         }
     </style>
 </head>
@@ -104,19 +115,19 @@
                 <p>Presented by E. Désiré Nzengou</p>
                 <p><a href="mailto:desire.nzengou@euspa.europa.eu" style="color: white;">desire.nzengou@euspa.europa.eu</a>, <a href="mailto:des@desiredsolutions.me" style="color: white;">des@desiredsolutions.me</a> | Satellite Communication Working Group</p>
                 <p class="fragment fade-in">"The Nordics—Sweden, Norway, Denmark, Finland, Iceland—can lead in space."</p>
-                <div class="footer"><a href="http://desiredsolutions.me" style="color:#fff"></i>desiredsolutions.me</a> | Désiré | Nordic Space Summit, March 2025</div>
+                <div class="footer"><a href="http://desiredsolutions.me">desiredsolutions.me</a> | Désiré | Nordic Space Summit, March 2025</div>
             </section>
 
             <!-- Slide 2: Current Status -->
             <section>
                 <h2>Where We Stand Today</h2>
-                <!--<p>[Nordic Map]</p>-->
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/nordics_500x366.jpg?v=1742246895755" class="fragment fade-in" alt="ESA + EUSPA">
                 <ul class="fragment fade-in">
                     <li><strong>Nordic Actors</strong>: Sweden (industry), Norway (funding), Denmark (downstream), Finland (cybersecurity), Iceland (remote sensing)</li>
-                    <li><strong>ESA &amp; EUSPA</strong>: Active but fragmented participation</li>
-                    <li><strong>Takeaway</strong>: "We’re players, not yet a team."</li>
+                    <li><strong>ESA & EUSPA</strong>: Active but fragmented participation</li>
+                    <li><strong>"We’re players, not yet a team."</strong></li>
                 </ul>
-                <p class="quote fragment fade-in">A zero-sum game approach to innovation &amp; entrepreneurship is too often the standard.</p>
+                <p class="quote fragment fade-in">A zero-sum game approach to innovation & entrepreneurship is too often the standard.</p>
                 <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
             </section>
 
@@ -125,9 +136,9 @@
                 <h2>Our Collective Edge</h2>
                 <h3>Focus Areas</h3>
                 <ul class="fragment fade-in">
-                    <li>[Satcom] Satellite Communications (Norway)</li>
-                    <li>[Cyber] Cybersecurity (Finland)</li>
-                    <li>[Data] Downstream Apps (Denmark, Iceland)</li>
+                    <li>Satcom => Satellite Communications (Norway)</li>
+                    <li>Cyber => Cybersecurity (Finland)</li>
+                    <li>Data => Downstream Apps (Denmark, Iceland)</li>
                 </ul>
                 <p class="fragment fade-in"><strong>Roles</strong>: Sweden (tech), Norway (funds), Denmark (sales), Finland (cyber), Iceland (data)</p>
                 <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
@@ -136,7 +147,7 @@
             <!-- Slide 4: Building with Europe -->
             <section>
                 <h2>Smart Collaboration</h2>
-                <p>[ESA + EUSPA Logo]</p>
+                <p>ESA + EUSPA</p>
                 <ul class="fragment fade-in">
                     <li><strong>Leverage</strong>: ESA ARTES, EUSPA CASSINI</li>
                     <li><strong>Consortium</strong>: Unified Nordic front</li>
@@ -150,10 +161,10 @@
             <section>
                 <h2>Amplifying with Innovation</h2>
                 <div class="fragment fade-in">
-                    <p>[Quantum] Quantum (Finland)</p>
-                    <p>[AI] AI/GenAI (Denmark)</p>
-                    <p>[Blockchain] Blockchain (Sweden)</p>
-                    <p>[VR] AR/VR (Iceland)</p>
+                    <p>Quantum (Finland)</p>
+                    <p>AI/GenAI (Denmark)</p>
+                    <p>Blockchain (Sweden)</p>
+                    <p>AR/VR (Iceland)</p>
                 </div>
                 <p class="fragment fade-in">"Pioneers in quantum-secure networks."</p>
                 <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
@@ -181,7 +192,7 @@
                 <div class="contact fragment fade-in">
                     <p>Get in Touch: <a href="mailto:desire.nzengou@euspa.europa.eu" style="color: white;">desire.nzengou@euspa.europa.eu</a></p>
                 </div>
-                <div class="footer"><a href="http://desiredsolutions.me" style="color:#fff"></i>desiredsolutions.me</a> | Désiré | Nordic Space Summit, March 2025</div>
+                <div class="footer"><a href="http://desiredsolutions.me">desiredsolutions.me</a> | Désiré | Nordic Space Summit, March 2025</div>
             </section>
         </div>
     </div>
@@ -195,18 +206,56 @@
             hash: true,
             width: '100%',
             height: '100%',
+            // Ensure all slides are rendered for PDF
+            dependencies: [
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js-plugins/pdf-export/pdf-export.js', async: true }
+            ]
         });
 
         function downloadPDF() {
-            const element = document.querySelector('.reveal');
-            const opt = {
-                margin: 0.5,
-                filename: 'Nordic_Space_Collaboration.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
+            const element = document.querySelector('.slides');
+            const slides = document.querySelectorAll('.slides section');
+            const pdf = new Promise((resolve) => {
+                Reveal.sync(); // Sync slide state
+                setTimeout(() => resolve(), 500); // Wait for rendering
+            });
+
+            pdf.then(() => {
+                const opt = {
+                    margin: 0.5,
+                    filename: 'Nordic_Space_Collaboration.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        width: window.innerWidth,
+                        height: window.innerHeight,
+                        useCORS: true // Enable CORS for external images
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Clone and prepare slides for full content capture
+                const fullContent = document.createElement('div');
+                fullContent.style.position = 'absolute';
+                fullContent.style.top = '-9999px';
+                fullContent.style.width = `${window.innerWidth}px`;
+                slides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+                    clone.style.height = 'auto';
+                    clone.style.minHeight = '0';
+                    clone.querySelectorAll('.fragment').forEach(frag => {
+                        frag.classList.remove('fragment');
+                        frag.style.opacity = '1';
+                    });
+                    fullContent.appendChild(clone);
+                });
+                document.body.appendChild(fullContent);
+
+                html2pdf().set(opt).from(fullContent).save().then(() => {
+                    document.body.removeChild(fullContent); // Clean up
+                });
+            });
         }
     </script>
 </body>
