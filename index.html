@@ -105,7 +105,7 @@
     </style>
 </head>
 <body>
-    <button class="download-btn"><a href="nss2025_mypreso_dn.pdf" download="https://eu.docworkspace.com/d/sIFTbvKSrAo-U5L4G?lg=en-US&sa=601.1074&ps=1&fn=nss2025_mypreso_dn.pdf" style="color:white">Download PDF</a></button>
+    <button class="download-btn" onclick="shareLink()">Share this deck</button>
 <!--<button class="download-btn" onclick="downloadPDF()" href="nss2025_mypreso_dn.pdf" download="https://eu.docworkspace.com/d/sIFTbvKSrAo-U5L4G?lg=en-US&sa=601.1074&ps=1&fn=nss2025_mypreso_dn.pdf">
   Download PDF
 </button>-->
@@ -203,6 +203,24 @@
 
     <!-- Reveal.js Script -->
     <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+    <script>
+        function shareLink() {
+            const shareData = {
+                title: 'Check out this document',
+                text: 'Here is an interesting presentation I found:',
+                url:  href='https://drive.google.com/file/d/1pWoARtfag31Ynvegr_amHpPyPLA7TdXF/'
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Link shared successfully'))
+                    .catch((error) => console.error('Error sharing link:', error));
+            } else {
+                alert('Web Share API is not supported in your browser.');
+            }
+        }
+    </script>
     <script>
         Reveal.initialize({
             transition: 'slide',
