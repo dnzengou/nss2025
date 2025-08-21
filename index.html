@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build with EU Space: CASSINI Framework</title>
+    <title>Build with EU Space Data</title>
     <!-- Reveal.js CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
@@ -368,4 +368,103 @@
                     <li><strong>Next Steps</strong>: Collaborate with EU space actors, explore resources</li>
                     <li><strong>Contact</strong>: <a href="mailto:nzengou@geoville.com" style="color: white;">nzengou@geoville.com</a></li>
                 </ul>
-                <p class="quote fragment f
+                <p class="quote fragment fade-in">Let’s innovate with EU space tech!</p>
+                <p class="fragment fade-in">Thank you! Q&A</p>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: In summary, EU Space empowers venture builders to innovate with space technology. Let’s discuss how we can make this happen at scale. Thank you! -->
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
+    <script>
+        // Share functionality
+        function shareLink() {
+            const shareData = {
+                title: 'Build with EU Space: CASSINI Framework',
+                text: 'Explore opportunities for tech entrepreneurs in the CASSINI initiative!',
+                url: 'https://drive.google.com/file/d/1pWoARtfag31Ynvegr_amHpPyPLA7TdXF/view'
+            };
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Presentation shared successfully'))
+                    .catch((error) => {
+                        console.error('Error sharing presentation:', error);
+                        alert('Failed to share. Copy this link: ' + shareData.url);
+                    });
+            } else {
+                alert('Web Share API is not supported. Copy this link: ' + shareData.url);
+            }
+        }
+
+        // Initialize Reveal.js
+        Reveal.initialize({
+            transition: 'slide',
+            transitionSpeed: 'fast',
+            hash: true,
+            width: '100%',
+            height: '100%',
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            overview: true,
+            dependencies: [
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js-plugins/pdf-export/pdf-export.js', async: true }
+            ]
+        });
+
+        // PDF download functionality with loading feedback
+        function downloadPDF() {
+            const downloadBtn = document.querySelector('.download-btn');
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+            const element = document.querySelector('.slides');
+            const slides = document.querySelectorAll('.slides section');
+            const pdf = new Promise((resolve) => {
+                Reveal.sync();
+                setTimeout(() => resolve(), 500);
+            });
+
+            pdf.then(() => {
+                const opt = {
+                    margin: 0.5,
+                    filename: 'EU_Space_CASSINI_2025.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        width: window.innerWidth,
+                        height: window.innerHeight,
+                        useCORS: true
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                const fullContent = document.createElement('div');
+                fullContent.style.position = 'absolute';
+                fullContent.style.top = '-9999px';
+                fullContent.style.width = `${window.innerWidth}px`;
+                slides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+                    clone.style.height = 'auto';
+                    clone.style.minHeight = '0';
+                    clone.querySelectorAll('.fragment').forEach(frag => {
+                        frag.classList.remove('fragment');
+                        frag.style.opacity = '1';
+                        frag.style.transform = 'none';
+                    });
+                    fullContent.appendChild(clone);
+                });
+                document.body.appendChild(fullContent);
+
+                html2pdf().set(opt).from(fullContent).save().then(() => {
+                    document.body.removeChild(fullContent);
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
