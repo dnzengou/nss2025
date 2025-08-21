@@ -3,282 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nordic Space Collaboration</title>
+    <title>Build with EU Space: CASSINI Framework</title>
     <!-- Reveal.js CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
-    <!-- html2pdf.js CDN for PDF generation -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/theme/white.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- html2pdf.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background: #f0f4f8;
+            font-family: 'Inter', 'Arial', sans-serif;
+            background: #f5f7fa;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
         .reveal {
-            font-size: 1.1em;
+            font-size: 1.2em;
+            line-height: 1.4;
         }
         .reveal .slides section {
             text-align: left;
-            padding: 2vw;
-            color: #333;
+            padding: 3vw;
+            color: #1a1a1a;
             min-height: 80vh;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            transition: all 0.3s ease;
         }
         .title-slide {
-            background: linear-gradient(45deg, #1e90ff, #fff);
+            background: linear-gradient(135deg, #003087, #ffd700);
             color: white;
             text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .title-slide h1 {
+            font-weight: 700;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
         }
         .timeline {
-            border-left: 3px solid #1e90ff;
-            padding-left: 1.5em;
-            animation: slideIn 1s ease-in;
+            border-left: 4px solid #003087;
+            padding-left: 2em;
+            animation: slideIn 0.8s ease-out;
         }
         .timeline-item {
-            margin: 1em 0;
+            margin: 1.5em 0;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4em;
+            top: 0.5em;
+            width: 14px;
+            height: 14px;
+            background: #003087;
+            border-radius: 50%;
         }
         .quote {
             font-style: italic;
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 1em;
+            color: #444;
+            font-size: 0.95em;
+            margin-top: 1.5em;
+            padding: 0.75em 1.25em;
+            background: #e8f0fe;
+            border-left: 4px solid #003087;
+            border-radius: 4px;
         }
         .footer {
             position: absolute;
-            bottom: 1em;
-            left: 2vw;
-            font-size: 0.8em;
-            color: #666;
+            bottom: 1.5em;
+            left: 3vw;
+            font-size: 0.85em;
+            color: #444;
         }
         .footer a {
-            color: #1e90ff;
+            color: #003087;
             text-decoration: none;
+            transition: color 0.2s ease;
         }
         .footer a:hover {
+            color: #ffd700;
             text-decoration: underline;
         }
         .title-slide .footer a {
-            color: white;
+            color: #e6f0ff;
         }
-        .download-btn {
+        .download-btn, .share-btn {
             position: fixed;
-            top: 1em;
-            right: 1em;
-            padding: 0.5em 1em;
-            background: #1e90ff;
+            top: 1.5em;
+            right: 1.5em;
+            padding: 0.75em 1.5em;
+            background: #003087;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             z-index: 1000;
+            font-size: 0.9em;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s ease, transform 0.2s ease;
         }
-        .download-btn:hover {
-            background: #00bfff;
+        .share-btn {
+            right: 9em;
         }
-        /* Responsive Image Styling */
+        .download-btn:hover, .share-btn:hover {
+            background: #ffd700;
+            color: #003087;
+            transform: scale(1.05);
+        }
+        .download-btn::before, .share-btn::before {
+            font-family: 'Font Awesome 5 Free';
+            margin-right: 0.5em;
+        }
+        .download-btn::before {
+            content: '\f019';
+        }
+        .share-btn::before {
+            content: '\f1e0';
+        }
         img {
-            max-width: 100%;
+            max-width: 90%;
             height: auto;
             display: block;
-            margin: 1em 0;
+            margin: 1.5em auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.02);
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
+            from { transform: translateX(-30px); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
         @media (max-width: 768px) {
-            .reveal { font-size: 0.9em; }
-            .reveal .slides section { padding: 1em; }
+            .reveal { font-size: 1em; }
+            .reveal .slides section { padding: 2em; }
+            .title-slide h1 { font-size: 2em; }
             .footer { font-size: 0.7em; }
-            img { max-width: 80%; }
+            img { max-width: 95%; }
+            .download-btn, .share-btn {
+                font-size: 0.8em;
+                padding: 0.5em 1em;
+                top: 0.5em;
+            }
+            .share-btn { right: 6.5em; }
+        }
+        @media (max-width: 480px) {
+            .download-btn, .share-btn {
+                display: block;
+                right: 1em;
+                margin-bottom: 0.5em;
+            }
+            .share-btn { top: 3.5em; right: 1em; }
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #003087;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1001;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <button class="download-btn" onclick="shareLink()">Share this deck</button>
-<!--<button class="download-btn" onclick="downloadPDF()" href="nss2025_mypreso_dn.pdf" download="https://eu.docworkspace.com/d/sIFTbvKSrAo-U5L4G?lg=en-US&sa=601.1074&ps=1&fn=nss2025_mypreso_dn.pdf">
-  Download PDF
-</button>-->
+    <div class="tooltip">
+        <button class="share-btn" onclick="shareLink()"><i class="fas fa-share-alt"></i> Share Deck</button>
+        <span class="tooltiptext">Share this presentation</span>
+    </div>
+    <div class="tooltip">
+        <button class="download-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Download PDF</button>
+        <span class="tooltiptext">Download as PDF</span>
+    </div>
     <div class="reveal">
         <div class="slides">
-            <!-- Slide 1: Introduction -->
-            <section class="title-slide">
-                <h1>Nordic Synergy in Satellite Communications</h1>
-                <h3>A Unified Future</h3>
-                <p>Presented by Désiré</p>
-                <p><a href="mailto:..." style="color: white;">des@email.me</a> | Satellite Communication Working Group</p>
-                <p class="fragment fade-in">"The Nordics—Sweden, Norway, Denmark, Finland, Iceland—can lead in space."</p>
-                <div class="footer"> Désiré | Nordic Space Summit, March 2025</div>
+            <!-- Slide 1: Title Slide -->
+            <section class="title-slide" role="region" aria-label="Introduction">
+                <h1>Opportunities and Challenges for Tech Entrepreneurs</h1>
+                <h3>Building Innovative Solutions with EU Space Technology</h3>
+                <p>Focus on Sweden in a Nordic Context, with Global Scaling Potential</p>
+                <p>Presented by E. Désiré Nzengou</p>
+                <p><a href="mailto:nzengou@geoville.com" style="color: white;">nzengou@geoville.com</a> | October 2025</p>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Welcome the audience. Briefly introduce yourself and the topic: "Today, we'll explore how tech entrepreneurs can harness EU space tech through the CASSINI initiative, with a spotlight on Sweden's role in the Nordics and beyond." -->
             </section>
 
-            <!-- Slide 2: Current Status -->
-            <section>
-                <h2>Where We Stand Today</h2>
-                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/nordics_500x366.jpg?v=1742246895755" class="fragment fade-in" alt="Nordic map">
+            <!-- Slide 2: EU Space Programme Overview -->
+            <section role="region" aria-label="EU Space Programme">
+                <h2>EU Space Programme Overview</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/eu-space-program.jpg" class="fragment fade-in" alt="Copernicus and Galileo satellites in orbit">
                 <ul class="fragment fade-in">
-                    <li><strong>Nordic Actors</strong>: Sweden (industry), Norway (funding), Denmark (downstream), Finland (cybersecurity), Iceland (remote sensing)</li>
-                    <li><strong>ESA &amp; EUSPA</strong>: Active but fragmented participation</li>
-                    <li><strong>"We’re players, not yet a team."</strong></li>
+                    <li><strong>Copernicus</strong>: Earth Observation for environment, climate, disaster monitoring</li>
+                    <li><strong>Galileo</strong>: GNSS for precise positioning, navigation, timing</li>
+                    <li><strong>Downstream Markets</strong>: Applications in agriculture, energy, health, gaming</li>
                 </ul>
-                <p class="quote fragment fade-in">A zero-sum game approach to innovation &amp; entrepreneurship is too often the standard.</p>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+                <p class="quote fragment fade-in">Free EU space data fuels entrepreneurial innovation.</p>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: The EU Space Programme provides vast, free data resources. Copernicus offers high-resolution EO imagery, while Galileo delivers accurate PNT – essential for location-based innovations. -->
             </section>
 
-            <!-- Slide 3: Strengthening Collaboration -->
-            <section>
-                <h2>Our Collective Edge</h2>
-                <h3>Focus Areas</h3>
+            <!-- Slide 3: Background on CASSINI and EUSPA -->
+            <section role="region" aria-label="CASSINI and EUSPA">
+                <h2>CASSINI and EUSPA</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/cassini-euspa.png" class="fragment fade-in" alt="CASSINI and EUSPA logos with Kiruna spaceport">
                 <ul class="fragment fade-in">
-                    <li>Satcom -> Satellite Communications (Norway)</li>
-                    <li>Cyber -> Cybersecurity (Finland)</li>
-                    <li>Data -> Downstream Apps (Denmark, Iceland)</li>
+                    <li><strong>CASSINI (2021-2027)</strong>: €1B for startups with funding, mentoring, market access</li>
+                    <li><strong>EUSPA</strong>: Manages Galileo/Copernicus, drives downstream innovation</li>
+                    <li><strong>Sweden/Nordics</strong>: ESA-BIC Sweden, Kiruna, Nordic sustainability focus</li>
                 </ul>
-                <p class="fragment fade-in"><strong>Roles</strong>: Sweden (tech), Norway (funds), Denmark (sales), Finland (cyber), Iceland (data)</p>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: CASSINI, run by EUSPA, is designed to empower entrepreneurs like you. It’s not just funding – it’s a full ecosystem for turning space data into viable businesses. In Sweden, this aligns with our innovation hubs, and the Nordics offer collaborative potential for cross-border scaling. -->
             </section>
 
-            <!-- Slide 4: Building with Europe -->
-            <section>
-                <h2>Smart Collaboration</h2>
-                <p></p>
-                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/esa-euspa.png?v=1742310904529.jpg?v=1742246895755" class="fragment fade-in" alt="ESA + EUSPA">
+            <!-- Slide 4: Opportunities for Tech Entrepreneurs -->
+            <section role="region" aria-label="Opportunities">
+                <h2>Opportunities for Tech Entrepreneurs</h2>
                 <ul class="fragment fade-in">
-                    <li><strong>Leverage</strong>: ESA ARTES, EUSPA CASSINI</li>
-                    <li><strong>Consortium</strong>: Unified Nordic front</li>
-                    <li><strong>Fit</strong>: Enhance IRIS² with our strengths</li>
+                    <li><strong>Free Data</strong>: Copernicus EO, Galileo PNT for cost-effective solutions</li>
+                    <li><strong>Funding</strong>: CASSINI prizes, Vinnova, ESA-BIC grants</li>
+                    <li><strong>Markets</strong>: Gaming, energy, health, carbon markets</li>
+                    <li><strong>Nordic Strengths</strong>: Talent, green economy, global networks</li>
                 </ul>
-                <p class="fragment fade-in">"Connect, don’t reinvent."</p>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Opportunities abound: Free data lowers barriers, CASSINI provides capital, and Sweden’s Nordic context offers a testbed for sustainable solutions with global appeal. -->
             </section>
 
-            <!-- Slide 5: Emerging Tech -->
-            <section>
-                <h2>Amplifying with Innovation</h2>
-                <div class="fragment fade-in">
-                    <p>Quantum (Finland)</p>
-                    <p>AI/GenAI (Denmark)</p>
-                    <p>Blockchain (Sweden)</p>
-                    <p>AR/VR (Iceland)</p>
-                </div>
-                <p class="fragment fade-in">"Pioneers in quantum-secure networks."</p>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            <!-- Slide 5: Key Challenges and Solutions -->
+            <section role="region" aria-label="Challenges and Solutions">
+                <h2>Key Challenges and Solutions</h2>
+                <ul class="fragment fade-in">
+                    <li><strong>Technical</strong>: AI/data integration; solved via CASSINI mentoring</li>
+                    <li><strong>Market</strong>: Viability, competition; focus on unique solutions</li>
+                    <li><strong>Nordic</strong>: Harsh climates, small markets; cross-border collaboration</li>
+                </ul>
+                <p class="quote fragment fade-in">CASSINI empowers startups to overcome barriers and scale globally.</p>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Challenges exist, like data integration and market entry, but CASSINI’s tools – from hackathons to accelerators – help overcome them, especially in the collaborative Nordic environment. -->
             </section>
 
-            <!-- Slide 6: Path Forward -->
-            <section>
-                <h2>From Vision to Results (Tentative Plan)</h2>
-                <div class="timeline fragment fade-in">
-                    <div class="timeline-item"><strong>Phase 1: Align (6 Months)</strong><br>Task Force, Pilot (Arctic Satcom)</div>
-                    <div class="timeline-item"><strong>Phase 2: Build (12 Months)</strong><br>Deploy by Q1 2027</div>
-                    <div class="timeline-item"><strong>Phase 3: Scale (18-24 Months)</strong><br>€50M revenue by 2028</div>
-                </div>
-                <p class="fragment fade-in">Sweden builds, Norway funds, Denmark sells, Finland secures, Iceland informs.</p>
-                <p class="quote fragment fade-in">Sourcing funding for space race is one thing; another is making each krona count.</p>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            <!-- Slide 6: Use Case 1 – Gaming and Consumer Solutions -->
+            <section role="region" aria-label="Gaming Use Case">
+                <h2>Use Case: Gaming and Consumer Solutions</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/ar-game.jpg" class="fragment fade-in" alt="AR game interface over Swedish forest landscape">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: AR/VR games with Galileo PNT, Copernicus EO</li>
+                    <li><strong>Nordic Example</strong>: Eco-themed games in Swedish landscapes</li>
+                    <li><strong>Benefits</strong>: Engages users, scalable via in-app purchases</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: In gaming, Galileo enables accurate positioning for AR experiences, while Copernicus adds real-world EO data – perfect for Sweden’s outdoor culture. -->
             </section>
 
-            <!-- Slide 7: Call to Action -->
-            <section class="title-slide">
-                <h2 style="color: white">Let’s Lead Together</h2>
-                <p class="fragment fade-in">"Join the Nordic Satcom Consortium. Start in 2025."</p>
-                <p class="fragment fade-in">Thank you!</p>
-              <p class="fragment fade-in">Your turn: <b>Which step can you take first?</b></p>
-                <div class="contact fragment fade-in">
-                    <p><a href="mailto:desire.nzengou@euspa.europa.eu" style="color: white;"> Get in Touch!</a></p>
-                </div>
-                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            <!-- Slide 7: Use Case 2 – Healthcare -->
+            <section role="region" aria-label="Healthcare Use Case">
+                <h2>Use Case: Healthcare</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/health-app.jpg" class="fragment fade-in" alt="Health app interface with air quality data">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: Health apps using Copernicus EO, Galileo PNT</li>
+                    <li><strong>Nordic Example</strong>: PASYFO app for allergy forecasting</li>
+                    <li><strong>Benefits</strong>: Enhances public health in remote areas</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Healthcare benefits from EO data for environmental health insights, combined with Galileo’s tracking – a game-changer for Nordic remote communities. -->
             </section>
-        </div>
-    </div>
 
-    <!-- Reveal.js Script -->
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+            <!-- Slide 8: Use Case 3 – Carbon Market -->
+            <section role="region" aria-label="Carbon Market Use Case">
+                <h2>Use Case: Carbon Market</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/swedish-forest.jpg" class="fragment fade-in" alt="Swedish forest with carbon sequestration overlay">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: Copernicus EO for carbon monitoring</li>
+                    <li><strong>Nordic Example</strong>: Forestry management in Sweden</li>
+                    <li><strong>Benefits</strong>: Supports EU Green Deal, enables carbon trading</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: In the carbon market, Copernicus tracks deforestation and crop health, helping Swedish entrepreneurs certify sustainable practices for global buyers. -->
+            </section>
 
-    <script>
-        function shareLink() {
-            const shareData = {
-                title: 'Check out this document',
-                text: 'Here is an interesting presentation I found:',
-                url:  href='https://drive.google.com/file/d/1pWoARtfag31Ynvegr_amHpPyPLA7TdXF/'
-            };
+            <!-- Slide 9: Use Case 4 – Energy and Mining -->
+            <section role="region" aria-label="Energy and Mining Use Case">
+                <h2>Use Case: Energy and Mining</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/mining-site.jpg" class="fragment fade-in" alt="Kiruna mining site with EO data annotations">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: EO for exploration, Galileo for autonomy</li>
+                    <li><strong>Nordic Example</strong>: Monitoring Kiruna mining sites</li>
+                    <li><strong>Benefits</strong>: Boosts efficiency, supports green mining</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: For energy and mining, space data provides situational awareness – crucial for Sweden’s resource sector, ensuring sustainable extraction. -->
+            </section>
 
-            if (navigator.share) {
-                navigator.share(shareData)
-                    .then(() => console.log('Link shared successfully'))
-                    .catch((error) => console.error('Error sharing link:', error));
-            } else {
-                alert('Web Share API is not supported in your browser.');
-            }
-        }
-    </script>
-    <script>
-        Reveal.initialize({
-            transition: 'slide',
-            transitionSpeed: 'fast',
-            hash: true,
-            width: '100%',
-            height: '100%',
-            // Ensure all slides are rendered for PDF
-            dependencies: [
-                { src: 'https://cdn.jsdelivr.net/npm/reveal.js-plugins/pdf-export/pdf-export.js', async: true }
-            ]
-        });
+            <!-- Slide 10: Disruptive Application – Quantum Technology -->
+            <section role="region" aria-label="Quantum Technology Use Case">
+                <h2>Disruptive Application: Quantum Technology</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/quantum-diagram.jpg" class="fragment fade-in" alt="QRNG integrated with satellite data flow">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: QRNG for secure Copernicus/Galileo data</li>
+                    <li><strong>Nordic Example</strong>: Sweden’s Wallenberg Centre systems</li>
+                    <li><strong>Benefits</strong>: Quantum-resistant encryption, blockchain traceability</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: A practical integration: QRNG secures satellite data streams from Copernicus and Galileo by generating unbreakable encryption keys. In Sweden’s Nordic quantum landscape, this enhances data integrity and traceability – with blockchain adding immutable records – scaling to protect international infrastructure. -->
+            </section>
 
-        function downloadPDF() {
-            const element = document.querySelector('.slides');
-            const slides = document.querySelectorAll('.slides section');
-            const pdf = new Promise((resolve) => {
-                Reveal.sync(); // Sync slide state
-                setTimeout(() => resolve(), 500); // Wait for rendering
-            });
+            <!-- Slide 11: Use Case 5 – Secured Live Data Streaming -->
+            <section role="region" aria-label="Secured Data Streaming Use Case">
+                <h2>Use Case: Secured Live Data Streaming</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/connexstream.jpg" class="fragment fade-in" alt="conneXstream interface over Arctic rescue map">
+                <ul class="fragment fade-in">
+                    <li><strong>Application</strong>: conneXstream for secure EO data streaming</li>
+                    <li><strong>Nordic Example</strong>: Arctic rescue operations in Sweden</li>
+                    <li><strong>Benefits</strong>: Enhances response times, supports civil security</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Leveraging conneXstream, this use case enables secure, failsafe streaming of EO data for situational awareness – vital for Sweden’s harsh Nordic environments in rescue and civil-defense, connecting actors worldwide. -->
+            </section>
 
-            pdf.then(() => {
-                const opt = {
-                    margin: 0.5,
-                    filename: 'Nordic_Space_Collaboration.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { 
-                        scale: 2,
-                        width: window.innerWidth,
-                        height: window.innerHeight,
-                        useCORS: true // Enable CORS for external images
-                    },
-                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-                };
+            <!-- Slide 12: Scaling Potential -->
+            <section role="region" aria-label="Scaling Potential">
+                <h2>Scaling Potential: Nordic to International</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/world-map.jpg" class="fragment fade-in" alt="Map showing Nordic to global expansion">
+                <ul class="fragment fade-in">
+                    <li><strong>Nordic Foundation</strong>: Sweden as hub, Finland/Norway testing</li>
+                    <li><strong>International Scale</strong>: EU markets via EUSPA, global climates</li>
+                    <li><strong>CASSINI Role</strong>: Accelerator for sales, social impact</li>
+                </ul>
+                <div class="footer">E. Désiré Nzengou | SWEO 2025, October 2025</div>
+                <!-- Speaker Notes: Start in Sweden’s innovative Nordic context, then scale globally – CASSINI’s tools make this feasible, turning local solutions into international leaders. -->
+            </section>
 
-                // Clone and prepare slides for full content capture
-                const fullContent = document.createElement('div');
-                fullContent.style.position = 'absolute';
-                fullContent.style.top = '-9999px';
-                fullContent.style.width = `${window.innerWidth}px`;
-                slides.forEach(slide => {
-                    const clone = slide.cloneNode(true);
-                    clone.style.height = 'auto';
-                    clone.style.minHeight = '0';
-                    clone.querySelectorAll('.fragment').forEach(frag => {
-                        frag.classList.remove('fragment');
-                        frag.style.opacity = '1';
-                    });
-                    fullContent.appendChild(clone);
-                });
-                document.body.appendChild(fullContent);
-
-                html2pdf().set(opt).from(fullContent).save().then(() => {
-                    document.body.removeChild(fullContent); // Clean up
-                });
-            });
-        }
-    </script>
-</body>
-</html>
+            <!-- Slide 13: Conclusion and Call to Action -->
+            <section class="title-slide" role="region" aria-label="Conclusion">
+                <h2 style="color: white">Conclusion and Call to Action</h2>
+                <ul class="fragment fade-in">
+                    <li><strong>Recap</strong>: CASSINI unlocks diverse market opportunities</li>
+                    <li><strong>Next Steps</strong>: Collaborate with EU space actors, explore resources</li>
+                    <li><strong>Contact</strong>: <a href="mailto:nzengou@geoville.com" style="color: white;">nzengou@geoville.com</a></li>
+                </ul>
+                <p class="quote fragment f
