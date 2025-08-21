@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nordic Space Collaboration</title>
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
+    <!-- html2pdf.js CDN for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .reveal {
+            font-size: 1.1em;
+        }
+        .reveal .slides section {
+            text-align: left;
+            padding: 2vw;
+            color: #333;
+            min-height: 80vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .title-slide {
+            background: linear-gradient(45deg, #1e90ff, #fff);
+            color: white;
+            text-align: center;
+        }
+        .timeline {
+            border-left: 3px solid #1e90ff;
+            padding-left: 1.5em;
+            animation: slideIn 1s ease-in;
+        }
+        .timeline-item {
+            margin: 1em 0;
+        }
+        .quote {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 1em;
+        }
+        .footer {
+            position: absolute;
+            bottom: 1em;
+            left: 2vw;
+            font-size: 0.8em;
+            color: #666;
+        }
+        .footer a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .title-slide .footer a {
+            color: white;
+        }
+        .download-btn {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            padding: 0.5em 1em;
+            background: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .download-btn:hover {
+            background: #00bfff;
+        }
+        /* Responsive Image Styling */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1em 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .reveal { font-size: 0.9em; }
+            .reveal .slides section { padding: 1em; }
+            .footer { font-size: 0.7em; }
+            img { max-width: 80%; }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="shareLink()">Share this deck</button>
+<!--<button class="download-btn" onclick="downloadPDF()" href="nss2025_mypreso_dn.pdf" download="https://eu.docworkspace.com/d/sIFTbvKSrAo-U5L4G?lg=en-US&sa=601.1074&ps=1&fn=nss2025_mypreso_dn.pdf">
+  Download PDF
+</button>-->
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Introduction -->
+            <section class="title-slide">
+                <h1>Nordic Synergy in Satellite Communications</h1>
+                <h3>A Unified Future</h3>
+                <p>Presented by Désiré</p>
+                <p><a href="mailto:..." style="color: white;">des@email.me</a> | Satellite Communication Working Group</p>
+                <p class="fragment fade-in">"The Nordics—Sweden, Norway, Denmark, Finland, Iceland—can lead in space."</p>
+                <div class="footer"> Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 2: Current Status -->
+            <section>
+                <h2>Where We Stand Today</h2>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/nordics_500x366.jpg?v=1742246895755" class="fragment fade-in" alt="Nordic map">
+                <ul class="fragment fade-in">
+                    <li><strong>Nordic Actors</strong>: Sweden (industry), Norway (funding), Denmark (downstream), Finland (cybersecurity), Iceland (remote sensing)</li>
+                    <li><strong>ESA &amp; EUSPA</strong>: Active but fragmented participation</li>
+                    <li><strong>"We’re players, not yet a team."</strong></li>
+                </ul>
+                <p class="quote fragment fade-in">A zero-sum game approach to innovation &amp; entrepreneurship is too often the standard.</p>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 3: Strengthening Collaboration -->
+            <section>
+                <h2>Our Collective Edge</h2>
+                <h3>Focus Areas</h3>
+                <ul class="fragment fade-in">
+                    <li>Satcom -> Satellite Communications (Norway)</li>
+                    <li>Cyber -> Cybersecurity (Finland)</li>
+                    <li>Data -> Downstream Apps (Denmark, Iceland)</li>
+                </ul>
+                <p class="fragment fade-in"><strong>Roles</strong>: Sweden (tech), Norway (funds), Denmark (sales), Finland (cyber), Iceland (data)</p>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 4: Building with Europe -->
+            <section>
+                <h2>Smart Collaboration</h2>
+                <p></p>
+                <img src="https://cdn.glitch.global/a2ddbebc-d3f4-4151-a4df-5d1b58765ad0/esa-euspa.png?v=1742310904529.jpg?v=1742246895755" class="fragment fade-in" alt="ESA + EUSPA">
+                <ul class="fragment fade-in">
+                    <li><strong>Leverage</strong>: ESA ARTES, EUSPA CASSINI</li>
+                    <li><strong>Consortium</strong>: Unified Nordic front</li>
+                    <li><strong>Fit</strong>: Enhance IRIS² with our strengths</li>
+                </ul>
+                <p class="fragment fade-in">"Connect, don’t reinvent."</p>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 5: Emerging Tech -->
+            <section>
+                <h2>Amplifying with Innovation</h2>
+                <div class="fragment fade-in">
+                    <p>Quantum (Finland)</p>
+                    <p>AI/GenAI (Denmark)</p>
+                    <p>Blockchain (Sweden)</p>
+                    <p>AR/VR (Iceland)</p>
+                </div>
+                <p class="fragment fade-in">"Pioneers in quantum-secure networks."</p>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 6: Path Forward -->
+            <section>
+                <h2>From Vision to Results (Tentative Plan)</h2>
+                <div class="timeline fragment fade-in">
+                    <div class="timeline-item"><strong>Phase 1: Align (6 Months)</strong><br>Task Force, Pilot (Arctic Satcom)</div>
+                    <div class="timeline-item"><strong>Phase 2: Build (12 Months)</strong><br>Deploy by Q1 2027</div>
+                    <div class="timeline-item"><strong>Phase 3: Scale (18-24 Months)</strong><br>€50M revenue by 2028</div>
+                </div>
+                <p class="fragment fade-in">Sweden builds, Norway funds, Denmark sells, Finland secures, Iceland informs.</p>
+                <p class="quote fragment fade-in">Sourcing funding for space race is one thing; another is making each krona count.</p>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+
+            <!-- Slide 7: Call to Action -->
+            <section class="title-slide">
+                <h2 style="color: white">Let’s Lead Together</h2>
+                <p class="fragment fade-in">"Join the Nordic Satcom Consortium. Start in 2025."</p>
+                <p class="fragment fade-in">Thank you!</p>
+              <p class="fragment fade-in">Your turn: <b>Which step can you take first?</b></p>
+                <div class="contact fragment fade-in">
+                    <p><a href="mailto:desire.nzengou@euspa.europa.eu" style="color: white;"> Get in Touch!</a></p>
+                </div>
+                <div class="footer">Désiré | Nordic Space Summit, March 2025</div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reveal.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+    <script>
+        function shareLink() {
+            const shareData = {
+                title: 'Check out this document',
+                text: 'Here is an interesting presentation I found:',
+                url:  href='https://drive.google.com/file/d/1pWoARtfag31Ynvegr_amHpPyPLA7TdXF/'
+            };
+
+            if (navigator.share) {
+                navigator.share(shareData)
+                    .then(() => console.log('Link shared successfully'))
+                    .catch((error) => console.error('Error sharing link:', error));
+            } else {
+                alert('Web Share API is not supported in your browser.');
+            }
+        }
+    </script>
+    <script>
+        Reveal.initialize({
+            transition: 'slide',
+            transitionSpeed: 'fast',
+            hash: true,
+            width: '100%',
+            height: '100%',
+            // Ensure all slides are rendered for PDF
+            dependencies: [
+                { src: 'https://cdn.jsdelivr.net/npm/reveal.js-plugins/pdf-export/pdf-export.js', async: true }
+            ]
+        });
+
+        function downloadPDF() {
+            const element = document.querySelector('.slides');
+            const slides = document.querySelectorAll('.slides section');
+            const pdf = new Promise((resolve) => {
+                Reveal.sync(); // Sync slide state
+                setTimeout(() => resolve(), 500); // Wait for rendering
+            });
+
+            pdf.then(() => {
+                const opt = {
+                    margin: 0.5,
+                    filename: 'Nordic_Space_Collaboration.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { 
+                        scale: 2,
+                        width: window.innerWidth,
+                        height: window.innerHeight,
+                        useCORS: true // Enable CORS for external images
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+                };
+
+                // Clone and prepare slides for full content capture
+                const fullContent = document.createElement('div');
+                fullContent.style.position = 'absolute';
+                fullContent.style.top = '-9999px';
+                fullContent.style.width = `${window.innerWidth}px`;
+                slides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+                    clone.style.height = 'auto';
+                    clone.style.minHeight = '0';
+                    clone.querySelectorAll('.fragment').forEach(frag => {
+                        frag.classList.remove('fragment');
+                        frag.style.opacity = '1';
+                    });
+                    fullContent.appendChild(clone);
+                });
+                document.body.appendChild(fullContent);
+
+                html2pdf().set(opt).from(fullContent).save().then(() => {
+                    document.body.removeChild(fullContent); // Clean up
+                });
+            });
+        }
+    </script>
+</body>
+</html>
